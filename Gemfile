@@ -8,12 +8,16 @@ gem 'figaro'
 gem 'httparty'
 gem 'pry'
 gem 'pry-byebug'
+gem 'redis'
 gem 'sidekiq'
 
 # Bootstrap
 gem 'less-rails'
 gem 'therubyracer'
 gem 'twitter-bootstrap-rails'
+
+# Heroku
+gem 'rails_12factor', group: :production
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
