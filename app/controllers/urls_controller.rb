@@ -1,15 +1,21 @@
 class UrlsController < ApplicationController
-  before_action :set_url, only: [:show, :edit, :update, :destroy]
+  before_action :set_url, only: %i[show edit update destroy]
   skip_before_action :verify_authenticity_token
 
   def index
-    @urls = Url.all
+    @urls = Url.left_joins(:url_visits)
+               .group(:id)
+               .order('COUNT(url_visits.id) DESC')
+               .limit(100)
   end
 
   def top
     # Left Joining URLs with visits and then ordering by count DESC (and limiting to 100) 
     # to achieve top 100 most visited feature.
-    @urls = Url.left_joins(:url_visits).group(:id).order('COUNT(url_visits.id) DESC').limit(100)
+    @urls = Url.left_joins(:url_visits)
+               .group(:id)
+               .order('COUNT(url_visits.id) DESC')
+               .limit(100)
 
     render json: @urls
   end
@@ -32,7 +38,6 @@ class UrlsController < ApplicationController
 
     respond_to do |format|
       if @url.save
-        @url.set_title
         format.html { redirect_to @url, notice: 'URL was successfully created.' }
         format.json { render :show, status: :created, location: @url }
       else
