@@ -32,6 +32,7 @@ class UrlsController < ApplicationController
 
     respond_to do |format|
       if @url.save
+        @url.set_title
         format.html { redirect_to @url, notice: 'URL was successfully created.' }
         format.json { render :show, status: :created, location: @url }
       else

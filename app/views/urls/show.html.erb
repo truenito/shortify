@@ -12,7 +12,11 @@
 
 <p>
   <strong>Title:</strong>
-  <%= @url.title %>
+    <% if @url.title.nil? %>
+      <i style='color: red'">Pending - Queued for Sidekiq</i>
+    <% else %>
+      <%= @url.title %>
+    <% end %>
 </p>
 
 <p>

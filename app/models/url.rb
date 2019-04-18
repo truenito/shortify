@@ -10,6 +10,10 @@ class Url < ApplicationRecord
     self.shortened_link = ShortenUrl.call(original_link)
   end
 
+  def set_title
+    CrawlUrlWorker.perform_async(id)
+  end
+
   def visit_count
     url_visits.count
   end
