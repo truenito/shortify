@@ -1,5 +1,5 @@
 class Url < ApplicationRecord
-  has_many :url_visits
+  has_many :url_visits, dependent: :destroy
   validates :original_link, uniqueness: true,
                             presence: true,
                             format: URI.regexp(%w[http https])
