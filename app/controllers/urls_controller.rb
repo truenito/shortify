@@ -1,5 +1,6 @@
 class UrlsController < ApplicationController
   before_action :set_url, only: [:show, :edit, :update, :destroy]
+  skip_before_action :verify_authenticity_token
 
   def index
     @urls = Url.all
@@ -23,8 +24,11 @@ class UrlsController < ApplicationController
   def edit
   end
 
+  # You can create a new url sending json requests like:
+  # curl -X POST -d "original_link=https://estilopanda.com" http://localhost:3000/urls.json
+  # When deployed, replace localhost:3000 with the correct
   def create
-    @url = Url.new(url_params)
+    @url = request.format.json? ? Url.new(original_link: params[:original_link]) : Url.new(url_params)
 
     respond_to do |format|
       if @url.save
@@ -69,7 +73,7 @@ class UrlsController < ApplicationController
   end
 
   private
-  
+
   def set_url
     @url = Url.find(params[:id])
   end
