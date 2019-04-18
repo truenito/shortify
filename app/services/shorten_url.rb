@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# ShortenUrl: Generates a shortened Url by passing the original Url through
+#             a SHA1 hash function and taking the last 8 digits.
 class ShortenUrl
   def self.call(original_link)
     new(original_link).call
