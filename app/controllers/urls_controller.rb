@@ -2,9 +2,15 @@ class UrlsController < ApplicationController
   before_action :set_url, only: [:show, :edit, :update, :destroy]
 
   def index
+    @urls = Url.all
+  end
+
+  def top
     # Left Joining URLs with visits and then ordering by count DESC (and limiting to 100) 
     # to achieve top 100 most visited feature.
     @urls = Url.left_joins(:url_visits).group(:id).order('COUNT(url_visits.id) DESC').limit(100)
+
+    render json: @urls
   end
 
   def show
