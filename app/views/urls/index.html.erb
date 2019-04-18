@@ -1,9 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Top 100 URLs</h1>
 
-<table>
-  <thead>
+<h1><u>Shortify</u></h1>
+<br>
+<%= link_to 'Top 100 URLS JSON', top_path, class: 'pull-right btn btn-primary', style: 'margin: 5px 0; color: white;' %>
+<br>
+
+<table class='table table-striped '>
+  <thead class='thead-dark'>
     <tr>
       <th>Title</th>
       <th>original link</th>
@@ -32,7 +36,5 @@
 </table>
 
 <br>
-<%= link_to 'Top 100 URLS JSON', top_path %>
-<br>
 
-<%= link_to 'New Url', new_url_path %>
+<%= link_to 'New Url', new_url_path, class: 'pull-right btn btn-success', style: 'margin: 5px 0; color: white;' %>
