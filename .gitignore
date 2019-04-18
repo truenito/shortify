@@ -71,6 +71,5 @@ yarn-debug.log*
 /storage/*
 !/storage/.keep
 # Ignore application configuration
-/config/application.yml
 
 dump.rdb

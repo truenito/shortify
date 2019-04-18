@@ -31,7 +31,7 @@ class UrlsController < ApplicationController
   end
 
   # You can create a new url sending json requests like:
-  # curl -X POST -d "original_link=https://estilopanda.com" http://localhost:3000/urls.json
+  # curl -X POST -d "original_link=https://estilopanda.com" https://damp-river-93551.herokuapp.com/urls.json
   # When deployed, replace localhost:3000 with the correct
   def create
     @url = request.format.json? ? Url.new(original_link: params[:original_link]) : Url.new(url_params)
