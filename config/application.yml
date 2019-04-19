@@ -1,4 +1,0 @@
-production:
-  HOST_URL:  'https://shtfy.herokuapp.com'
-development:
-  HOST_URL: 'localhost:3000'
