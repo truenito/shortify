@@ -3,6 +3,8 @@
 # ShortenUrl: Generates a shortened Url by passing the original Url through
 #             a SHA1 hash function and taking the last 8 digits.
 class ShortenUrl
+  attr_accessor :original_link
+
   def self.call(original_link)
     new(original_link).call
   end
@@ -18,12 +20,14 @@ class ShortenUrl
   end
 
   def shorten
-    ENV['HOST_URL'] + "/#{short_id}"
+    ENV['HOST_URL'] + "/#{short_id_base64}"
   end
 
-  def short_id
+  def short_id_sha
     Digest::SHA1.hexdigest(original_link).last(6)
   end
 
-  attr_reader :original_link
+  def short_id_base64
+    Base64.encode64(original_link).strip.last(10)[0..-3]
+  end
 end
