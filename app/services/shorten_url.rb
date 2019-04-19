@@ -22,7 +22,7 @@ class ShortenUrl
   end
 
   def short_id
-    Digest::SHA1.hexdigest(original_link).last(8)
+    Digest::SHA1.hexdigest(original_link).last(6)
   end
 
   attr_reader :original_link
