@@ -19,3 +19,7 @@
   table-layout: fixed;
   word-wrap: break-word;
  }
+
+ .underline{
+  text-decoration: underline;
+ }

@@ -31,7 +31,7 @@ class UrlsController < ApplicationController
   end
 
   # You can create a new url sending json requests like:
-  # curl -X POST -d "original_link=https://estilopanda.com" https://damp-river-93551.herokuapp.com/urls.json
+  # curl -X POST -d "original_link=https://estilopanda.com" http://localhost:3000/urls.json
   # When deployed, replace localhost:3000 with the correct
   def create
     @url = request.format.json? ? Url.new(original_link: params[:original_link]) : Url.new(url_params)
@@ -70,11 +70,14 @@ class UrlsController < ApplicationController
   def redirect
     if params[:shortened_link]
       url = Url.where(shortened_link: ENV['HOST_URL'] + "/#{params[:shortened_link]}").first
-      if url
-        UrlVisit.create!(url_id: url.id) if redirect_to url.original_link
+      respond_to do |format|
+        if url
+          UrlVisit.create!(url_id: url.id)
+          format.html { redirect_to url.original_link }
+        else
+          format.html { redirect_to root_path }
+        end
       end
-    else
-      redirect_to root_path
     end
   end
 
